@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import BookTransactionScreen from './screens/BookTransactionScreen'
 import SearchScreen from './screens/SearchScreen'
 import {createAppContainer} from 'react-navigation'
@@ -18,6 +18,27 @@ export default class App extends React.Component {
 const TabNavigator= createBottomTabNavigator({
   Transaction:{screen:BookTransactionScreen},
   Search:{screen:SearchScreen}
+},
+{
+  defaultNavigationOptions:({navigation})=>({
+    tabBarIcon:()=>{
+      const routeName=navigation.state.routeName;
+      if (routeName==='Transaction'){
+        return(
+          <Image source={require('./assets/book.png')} style={{width:40, height:40}}>
+
+          </Image>
+        )
+      }
+      else if(routeName==='Search'){
+        return(
+          <Image source={require('./assets/searchingbook.png')} style={{width:40, height:40}}>
+
+          </Image>
+        ) 
+      }
+    }
+  })
 })
 const AppContainer= createAppContainer(TabNavigator)
 const styles = StyleSheet.create({
